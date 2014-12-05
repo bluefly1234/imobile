@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>function</title>
+    <link rel="stylesheet" href="../css/docs.min.css">
+    <style>
+    body ,html{
+        margin: 0;
+        padding: 0; 
+    }
+    .container {
+        width: 960px;
+        margin: 30px auto;
+    }
+    .form-mobile .form-group {
+        margin: 0;
+        padding: 3px;
+        border-bottom: 1px solid #ddd;
+    }
+    #doc-widget-frame {
+        width: 320px;
+        height: 480px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-x: hidden;
+        -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+        box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+        border: none;
+    }
+    .p {
+        position: absolute;
+        background: red;
+        width: 200px;
+        height: 120px;
+    }
+    </style>
+</head>
+<body>
+
+
+    <div class="p" id="p">
+        
+    </div>
+
+</body>
+
+<script>
+    function rate(width, height) {
+        var wWidth = window.innerWidth,
+            wHeight = window.innerHeight;
+        var mid;
+        if (width <= wWidth && height <= wHeight) {} else if (width > wWidth && height > wHeight) {
+            var rateW = wWidth / width,
+                rateH = wHeight / height;
+            if (rateW <= rateH) {
+                mid = width;
+                width = wWidth;
+                height = height * width / mid
+            } else {
+                mid = height;
+                height = wHeight;
+                width = width * height / mid
+            }
+        } else if (width > wWidth) {
+            mid = width;
+            width = wWidth;
+            height = height * wWidth / mid
+        } else if (height > wHeight) {
+            mid = height;
+            height = wHeight;
+            width = width * wHeight / mid
+        } else {};
+        var top = (wHeight - height) / 2,
+            left = (wWidth - width) / 2;
+        return {
+            width: width,
+            height: height,
+            top: top,
+            left: left
+        }
+    }
+    var result = rate(900,620);
+
+    console.log(result)
+    var p = document.getElementById('p');
+    p.style.left = result.left + 'px';
+    p.style.top = result.top + 'px';
+    p.style.width = result.width + 'px';
+    p.style.height = result.height + 'px'; 
+</script>
+</html>

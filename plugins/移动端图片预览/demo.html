@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Pragma" content="no-cache" />  
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="max-age=0"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>图片预览</title>
+    <link rel="stylesheet" href="./css/imageview.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/imageview.js"></script>
+    <style>
+        .photo-list {
+            padding: 15px;
+        }
+        .photo-list span {
+            display: inline-block;
+            margin: 5px;
+        }
+        .photo-list span img {
+            width: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>图片预览</h1>
+    <div class="photo-list" data-role="photoList">
+        <span data-role="photoItem" data-title="我是标题1" data-original="pic/1.jpg">
+            <img src="pic/1.jpg" alt="">
+        </span>
+        <span data-role="photoItem" data-title="我是标题2" data-original="pic/2.jpg">
+            <img src="pic/2.jpg" alt="">
+        </span>
+        <span data-role="photoItem" data-title="我是标题3" data-original="pic/3.jpg">
+            <img src="pic/3.jpg" alt="">
+        </span>
+        <span data-role="photoItem" data-title="我是标题4" data-original="pic/4.jpg">
+            <img src="pic/4.jpg" alt="">
+        </span>
+        
+    </div>
+
+
+    <script>
+        $(function(){
+            
+            function bindPreviewPhoto(options){
+            
+
+                // 预览照片
+                $('body').on('click', '[data-role="photoItem"]', function(e){
+                    var $photoItem = $(e.currentTarget),
+                        $list = $photoItem.closest('[data-role="photoList"]'),
+                        url = $photoItem.attr('data-original'),
+                        index = $photoItem.index() || 0,
+                        titles = [],
+                        pics = [];
+
+                    $list.find('[data-role="photoItem"]').each(function(i,item){
+                        var url = $(item).attr('data-original'), title = $(item).attr('data-title');
+
+                        pics.push(url);
+                        titles.push(title);
+
+
+                    });
+                    console.log(url,pics)
+                    if(window.WeixinJSBridge){
+                        WeixinJSBridge.invoke('imagePreview', {
+                          'current' : url,
+                          'urls' : pics
+                        });
+                    }else {
+                        window.ImageView.init(pics, index, {titles:titles});
+                    }
+                    
+                });
+            }
+            
+            bindPreviewPhoto();
+
+            
+
+        });
+
+    </script>
+</body>
+</html>

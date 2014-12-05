@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript模拟抽奖程序，随机选择姓名 - 分享JavaScript-sharejs.com</title>
+  <style>
+ .btn {
+font-size: 21px;
+padding: 14px 24px;
+margin: 20px;
+border-radius: 6px;
+
+}
+.primary.btn {
+color: #fff;
+text-decoration: none;
+text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+background-color: #3072b3;
+background-repeat: repeat-x;
+background-image: -moz-linear-gradient(top, #599bdc 0%, #3072b3 100%);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#599bdc), color-stop(100%,#3072b3));
+background-image: -webkit-linear-gradient(top, #599bdc 0%,#3072b3 100%);
+background-image: -ms-linear-gradient(top, #599bdc 0%,#3072b3 100%);
+background-image: -o-linear-gradient(top, #599bdc 0%,#3072b3 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#599bdc', endColorstr='#3072b3',GradientType=0 );
+background-image: linear-gradient(top, #599bdc 0%,#3072b3 100%);
+border: 1px solid #2967a4;
+-webkit-transition: none;
+-moz-transition: none;
+transition: none;
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 2px rgba(0,0,0,.2);
+-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 2px rgba(0,0,0,.2);
+box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 2px rgba(0,0,0,.2);
+
+}
+.primary.btn:hover {
+  background-position: 0 -15px;
+}
+
+
+.button.active_button {
+color: #fff;
+background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#fc7000),color-stop(100%,#e45000));
+background-image: -webkit-linear-gradient(#fc7000,#e45000);
+background-image: -moz-linear-gradient(#fc7000,#e45000);
+background-image: -o-linear-gradient(#fc7000,#e45000);
+background-image: -ms-linear-gradient(#fc7000,#e45000);
+background-image: linear-gradient(#fc7000,#e45000);
+-webkit-box-shadow: rgba(0,0,0,.1) 0 .029em .118em 0 inset;
+-moz-box-shadow: rgba(0,0,0,.1) 0 .029em .118em 0 inset;
+box-shadow: rgba(0,0,0,.1) 0 .029em .118em 0 inset;
+border-top-color: #db6100;
+border-left-color: #e56000;
+border-right-color: #e56000;
+border-bottom-color: #df4d00;
+}
+.button {
+  text-decoration: none;
+font-size: 1.7em;
+display: block;
+font-weight: 700;
+text-align: center;
+line-height: 2.618em;
+-webkit-border-radius: .235em;
+-moz-border-radius: .235em;
+-ms-border-radius: .235em;
+-o-border-radius: .235em;
+border-radius: .235em;
+overflow: hidden;
+border-width: 1px;
+border-style: solid;
+text-shadow: rgba(0,0,0,.3) 0 -1px 0;
+}
+
+  </style>
+</head>
+<body>
+  <script>   
+  var alldata = "中奖了,没中奖,真的中了,差一点点就中了,再试一次,还差点人品,下次再来,欢迎惠顾,不行啊,可惜了" //抽奖的姓名，以,为分隔   
+    
+  var alldataarr = alldata.split(",")   
+  var num = alldataarr.length-1   
+  var timer; 
+  function change(){   
+    document.getElementById("oknum").value = alldataarr[GetRnd(0,num)];   
+  }   
+    
+  function start(){   
+    clearInterval(timer);   
+    timer = setInterval('change()',50); //50（毫秒）为变换间隔，越小变换的越快   
+  }   
+    
+  function ok(){   
+    clearInterval(timer);   
+  }   
+    
+  function GetRnd(min,max){   
+    return   parseInt(Math.random()*(max-min+1));   
+  }   
+  </script>
+  模拟抽奖：
+  <input type="text" id="oknum" name="oknum" value="">
+  <button onclick="start()" accesskey="s">开始  </button>
+  <button onclick="ok()" accesskey="o"> 停止 </button>
+  <p>
+    <a href="javascript:;" class="btn btn-large primary">See more on Github</a>
+  </p>
+  <p>
+    <a href="http://m.mi.com/index.html#ac=home&amp;op=selectversion&amp;phone_type=m3 " class="button active_button">立即购买</a>
+  </p>
+  
+
+
+</body>
+</html>

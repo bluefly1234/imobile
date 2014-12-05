@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>翻牌子</title>
+    <style>
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+    .media-item {
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #ddd;
+        border-radius: 7px;
+        display: inline-block;
+        vertical-align: top;
+        *display: inline;
+        width: 120px;
+        margin: 5px 7px;
+        text-align: center;
+    }
+    .media-icon {
+        height: 110px;
+    }
+    .media-logo, .media-qrcode{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        left: 10px;
+        top: 5px;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        transition: 0.5s;
+        -webkit-transition: 0.5s;
+        -moz-transition: 0.5s;
+        -o-transition: 0.5s;
+    }
+    .media-logo{
+        transform: rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -o-transform: rotateY(0deg);
+        z-index: 4;
+        display: block; 
+
+        -webkit-animation: logoTurn 3s;  
+        animation: logoTurn 3s;
+        animation-delay:2s;
+        -webkit-animation-delay:1.5s;
+        animation-iteration-count:1;
+        -moz-animation: logoTurn 3s; 
+        -o-animation: logoTurn 3s;   
+    }
+    .media-qrcode {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        z-index: 2;
+        display: block; 
+        
+        -webkit-animation: qrcodeTurn 3s;  
+        animation: qrcodeTurn 3s;
+        animation-delay:2s;
+        -webkit-animation-delay:1.5s;
+        -webkit-animation-iteration-count:1;
+        -moz-animation: qrcodeTurn 3s; 
+        -o-animation: qrcodeTurn 2s;   
+    }
+    
+    .media-logo img,.media-qrcode img {
+        width: 100%;
+        height: 100%;
+    }
+    .media-name {
+        text-align: center;
+        height: 40px;
+        padding: 0 3px;
+        font-size: 14px;
+
+    }
+    .media-item:hover .media-logo, .media-item-hover .media-logo{
+        transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+    }
+    .media-item:hover .media-qrcode, .media-item-hover .media-qrcode {
+        transform: rotateY(360deg);
+        -ms-transform: rotateY(360deg);
+        -webkit-transform: rotateY(360deg);
+        -moz-transform: rotateY(360deg);
+        -o-transform: rotateY(360deg);
+    }
+    
+
+    @keyframes logoTurn 
+    {
+        from {transform: rotateY(0deg);-webkit-transform: rotateY(0deg);}
+        to {transform: rotateY(360deg);-webkit-transform: rotateY(360deg);}
+    }
+    @keyframes qrcodeTurn 
+    {
+        from {transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+        to {transform: rotateY(540deg);-webkit-transform: rotateY(540deg);}
+    }
+
+    @-webkit-keyframes logoTurn /* Safari  Chrome */
+    {
+        from {transform: rotateY(0deg);-webkit-transform: rotateY(0deg);}
+        to {transform: rotateY(360deg);-webkit-transform: rotateY(360deg);}
+    }
+    @-webkit-keyframes qrcodeTurn /* Safari  Chrome */
+    {
+        from {transform: rotateY(180deg);-webkit-transform: rotateY(180deg);}
+        to {transform: rotateY(540deg);-webkit-transform: rotateY(540deg);}
+    }
+
+
+
+    .media-search-container {
+        margin: 0 auto;
+        text-align: right;
+        padding: 10px 10px;
+    }
+    .z-search-box {
+        display: inline-block;
+        width: 278px;
+        height: 28px;
+        border: solid 2px #c5c5c5;
+        border-radius: 2px;
+    }
+    .z-search-input {
+        float: left;
+        height: 20px;
+        line-height: 20px;
+        padding: 4px 10px;
+        width: 222px;
+        border: 0;
+        color: #999;
+        font-size: 14px;
+        outline: none;
+    }
+    .z-search-btn {
+        display: inline-block;
+        float: right;
+        width: 35px;
+        height: 28px;
+        cursor: pointer;
+        color: #6c2024;
+        background: url(./images/search.jpg) center center no-repeat;
+        zoom: 1;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>移上去翻拍</h1>
+        <div class="media-search-container">
+            <span class="z-search-box">
+                <input type="text" placeholder="" class="z-search-input ac_input" id="z-search-input" autocomplete="off">        
+                <a href="javascript:void(0)" class="z-search-btn" id="z-search-btn"></a>
+            </span>
+        </div>
+        <div class="media-list">
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/爱尚退休.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/爱尚退休1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">爱尚退休</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/百老惠.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/百老惠1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">百老惠</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/帮你赚点钱.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/帮你赚点钱1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">帮你赚点钱</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/边锋游戏.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/边锋游戏1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">边锋游戏</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/财富宝.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/财富宝1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">财富宝</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/传媒梦工场.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/传媒梦工场1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">传媒梦工场</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/传媒评论.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/传媒评论1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">传媒评论</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/聪明堡.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/聪明堡1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">聪明堡</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/大腕儿.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/大腕儿1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">大腕儿</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/大浙家长汇.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/大浙家长汇1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">大浙家长汇</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/大浙汽车.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/大浙汽车1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">大浙汽车</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/点兵点将点Asir.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/点兵点将点Asir1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">点兵点将点Asir</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/东阳日报.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/东阳日报1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">东阳日报</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/反腐前沿.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/反腐前沿1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">反腐前沿</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/公益书法蒲公英计划.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/公益书法蒲公英计划1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">公益书法蒲公英计划</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/光荣浙商.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/光荣浙商1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">光荣浙商</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/海宁日报.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/海宁日报1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">海宁日报</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/海宁晓得伐.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/海宁晓得伐1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">海宁晓得伐</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/杭州吃货.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/杭州吃货1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">杭州吃货</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/杭州动动帮.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/杭州动动帮1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">杭州动动帮</div>
+            </div>
+            <div class="media-item">
+                <div class="media-icon">
+                    <div class="media-logo">
+                        <img src="./logo/杭州房产.jpg" alt=""></div>
+                    <div class="media-qrcode">
+                        <img src="./logo/杭州房产1.jpg" alt=""></div>
+                </div>
+                <div class="media-name">杭州房产</div>
+            </div>
+        </div>
+        
+    </div>
+        
+
+</body>
+
+<script>
+ 
+</script>
+</html>

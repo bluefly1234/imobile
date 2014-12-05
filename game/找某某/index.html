@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/m.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/underscore-min.js"></script> 
+    <script type="text/javascript">         
+        var imgUrl = window.location.href.replace('index.html','photos/who.jpg');
+
+        window.shareData = {
+            "imgUrl": imgUrl,
+            "timeLineLink": window.location.href,
+            "title": "一起来找大美女！",
+            "content": "谁是杭州最美丽的人?"
+        };
+    </script>
+    
+</head>
+<body>
+    <div class="grid">
+        <div class="page hide" id="loading" style="display: none;"> loading... </div>
+        <div class="page hide" id="index" style="">
+            <!-- 一起来找某某 -->
+            <h1 id="title"></h1>
+            <!-- 内容 -->
+            <div id="help"></div>
+            <div id="logo"></div>
+            <div class="btns">
+              <button data-type="color" class="btn play-btn"> 开始游戏 </button>
+            </div>
+        </div>
+        <div class="page hide" id="room">
+            <header>
+                <span class="lv"> 得分： <em> 1 </em></span>
+                <span class="time"></span>
+                <span class="btn btn-pause"> 暂停 </span>
+            </header>
+            <div id="box" class="lv1"></div>
+        </div>
+
+        <div class="page hide" id="dialog">
+            <div class="inner">
+                <div class="content gameover">
+                    <p> 经鉴定，您是： </p>
+                    <h3></h3>
+                    <div class="btn-wrap">
+                        <button class="btn btn-restart"> 再来一次 </button>
+                    </div>
+                </div>
+                <div class="content pause">
+                    <h3> 游戏暂停 </h3>
+                    <div class="btn-wrap">
+                        <button class="btn btn-resume"> 继续游戏 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+        
+
+</body>
+
+<script src="js/main.js"></script>
+<script>
+    window.addEventListener("orientationchange", function() {
+        window.location.reload();
+    });
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "img_url": window.shareData.imgUrl,
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            });
+        });
+        WeixinJSBridge.on('menu:share:timeline', function(argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            });
+        });
+    }, false);
+        
+
+    document.title = window.shareData.title;
+    document.getElementById('title').innerHTML = window.shareData.title;
+    document.getElementById('help').innerHTML = window.shareData.content;
+    window.GameData = {
+        lvT: ["老宋1的路人粉", "老宋的路人粉", "老宋的路人粉", "老宋的忠实粉", "老宋的忠实粉", "老宋的忠实粉", "老宋的脑残粉", "老宋的脑残粉", "老宋的脑残粉！"],
+        who:{
+            name:'老宋1',
+            avatar:'./photos/who.jpg'
+            //avatar:'http://cs.58zs.com/3/gia/fimg/images/swp.jpg'
+        },
+        where:{
+            name:'老孙2',
+            avatar:'./photos/where.jpg'
+            //avatar:'http://cs.58zs.com/3/gia/fimg/images/shb.jpg'
+        }
+    };
+</script>
+</html>

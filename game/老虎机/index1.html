@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery老虎机插件slotmachine</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0">
+
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.slotmachine.js"></script>
+
+</head>
+
+<body>
+
+<div class="line" style="width:100%;">
+    
+    <div class="content" style="text-align: center;width:100%;">
+        
+        <div style="clear:both;">
+            <p class="title">打乱你的机器:</p>
+        </div>
+        
+        <div style="clear:both;">
+            <div id="machine1" class="slotMachine">
+                <div class="slot slot1"></div>
+                <div class="slot slot2"></div>
+                <div class="slot slot3"></div>
+                <div class="slot slot4"></div>
+                <div class="slot slot5"></div>
+                <div class="slot slot6"></div>
+            </div>
+            
+            <div id="machine2" class="slotMachine">
+                <div class="slot slot1"></div>
+                <div class="slot slot2"></div>
+                <div class="slot slot3"></div>
+                <div class="slot slot4"></div>
+                <div class="slot slot5"></div>
+                <div class="slot slot6"></div>
+            </div>
+            
+            <div id="machine3" class="slotMachine">
+                <div class="slot slot1"></div>
+                <div class="slot slot2"></div>
+                <div class="slot slot3"></div>
+                <div class="slot slot4"></div>
+                <div class="slot slot5"></div>
+                <div class="slot slot6"></div>
+            </div>
+            
+            <div id="slotMachineButton1" class="slotMachineButton" style="display:block;margin:0 auto;">GO!</div>
+            
+            <script>
+                $(document).ready(function(){
+                    var machine1 = $("#machine1").slotMachine({
+                        active  : 0,
+                        delay   : 500
+                    });
+                    
+                    var machine2 = $("#machine2").slotMachine({
+                        active  : 1,
+                        delay   : 500
+                    });
+                    
+                    var machine3 = $("#machine3").slotMachine({
+                        active  : 2,
+                        delay   : 500
+                    });
+                    
+                    function onComplete($el, active){
+                        console.log($el,active);
+                        machine1.next();
+                        switch($el[0].id){
+                            case 'machine1':
+                                $("#machine1Result").text("Index: "+active.index);
+                                break;
+                            case 'machine2':
+                                $("#machine2Result").text("Index: "+active.index);
+                                break;
+                            case 'machine3':
+                                $("#machine3Result").text("Index: "+active.index);
+                                break;
+                        }
+                    }
+                    
+                    $("#slotMachineButton1").click(function(){
+                        
+                        machine1.shuffle(10, onComplete);
+                        return
+                        setTimeout(function(){
+                            machine2.shuffle(3, onComplete);
+                        }, 500);
+                        
+                        setTimeout(function(){
+                            machine3.shuffle(3, onComplete);
+                        }, 1000);
+                        
+                    })
+                });
+            </script>
+        </div>
+        
+        <div style="clear:both;">
+            <div id="machine1Result" class="slotMachine noBorder" style="text-align:left">Index: 0</div>
+            <div id="machine2Result" class="slotMachine noBorder" style="text-align:left">Index: 1</div>
+            <div id="machine3Result" class="slotMachine noBorder" style="text-align:left">Index: 2</div>
+            <div class="slotMachine noBorder"></div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+</body>
+</html>

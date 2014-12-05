@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>模拟窗口</title>
+    <link rel="stylesheet" href="../src/docs.min.css">
+    <link rel="stylesheet" href="../src/imobile.css">
+    <script src="../external/jquery/jquery-1.8.3.min.js"></script>
+    <script src="../src/imobile.js"></script>
+    <style>
+    .container {
+        width: 960px;
+        margin: 30px auto;
+    }
+    .form-mobile .form-group {
+        margin: 0;
+        padding: 3px;
+        border-bottom: 1px solid #ddd;
+    }
+    #doc-widget-frame {
+        width: 320px;
+        height: 480px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-x: hidden;
+        -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+        box-shadow: 0 0 5px 2px rgba(0,0,0,.1);
+        border: none;
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h2>表单</h2>
+    <div class="bs-example">
+        <form role="form" class="form-mobile">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile" class="form-label">File input</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            <div class="form-group">
+                <label  class="form-label form-label-top">File input</label>
+                <textarea class="form-control"></textarea>
+                <p class="help-block">Example block-level help text here.</p>
+            </div>
+            
+            <div class="form-group checkbox">
+                <label>
+                  <input type="checkbox"> Check me out
+                </label>
+            </div>
+
+            <div class="form-action">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+                
+        </form>
+
+    </div>
+
+    <h2>按钮</h2>
+    <div class="bs-example">
+        <!-- Standard button -->
+        <button type="button" class="btn btn-default">Default</button>
+
+        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        <button type="button" class="btn btn-primary">Primary</button>
+
+        <!-- Indicates a successful or positive action -->
+        <button type="button" class="btn btn-success">Success</button>
+
+        <!-- Contextual button for informational alert messages -->
+        <button type="button" class="btn btn-info">Info</button>
+
+        <!-- Indicates caution should be taken with this action -->
+        <button type="button" class="btn btn-warning">Warning</button>
+
+        <!-- Indicates a dangerous or potentially negative action -->
+        <button type="button" class="btn btn-danger">Danger</button>
+
+        <!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+        <button type="button" class="btn btn-link">Link</button>
+
+    </div>
+    
+    <h2>模拟窗口</h2>
+    <div class="bs-example">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-default" id="showModalBtn" data-toggle="modal" data-target="#myModal">
+          Launch demo modal
+        </button>
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#alert">
+            alert
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm">
+            confirm
+        </button> -->
+
+        <button type="button" class="btn btn-default btn-show-alert">
+            alert
+        </button>
+        <button type="button" class="btn btn-default btn-show-confirm" >
+            confirm
+        </button>
+
+    </div>
+
+    <h2>loading</h2>
+    <div class="bs-example">
+        <button type="button" class="btn btn-default btn-show-loading">
+            show
+        </button>
+        <button type="button" class="btn btn-default btn-hide-loading" >
+            hide
+        </button>
+        <button type="button" class="btn btn-default btn-success-loading" >
+            success
+        </button>
+
+    </div>
+</div>
+    
+
+    <!-- modal -->
+    <div class="modal" role="dialog" style="" id="myModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- alert警告框 -->
+    <!-- <div class="modal modal-mobile" role="dialog" id="alert">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                    Hello World!
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" class="btn-alert" data-dismiss="modal">确定</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- confirm -->
+    <!-- <div class="modal modal-mobile" role="dialog" style="" id="confirm">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-body">
+                    你确定要这么做？？？
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" class="btn-confirm-no" data-dismiss="modal">取消</a>
+                    <a href="javascript:void(0)" class="btn-confirm-yes" data-dismiss="modal">确定</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+</body>
+
+<script>
+    $(function(){
+        //alert(1)
+        //$('#myModal').modal('show')
+
+        $('.btn-show-alert').bind('click',function(){
+            iMobile.alert('我',function(){
+                alert('去')
+            });
+        });
+
+        $('.btn-show-confirm').bind('click',function(){
+            iMobile.confirm('你确定不要我了？？？',function(){
+                alert('一万个确定！')
+            },function(){
+                alert('犹豫中...');
+            });
+        });
+
+
+
+        // loading
+        $('.btn-show-loading').bind('click',function(){
+            iMobile.loading.show();
+        });
+        $('.btn-hide-loading').bind('click',function(){
+            iMobile.loading.hide();
+        });
+
+        $('.btn-success-loading').bind('click',function(){
+            iMobile.loading.success();
+        });
+    });
+
+</script>
+</html>
